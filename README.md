@@ -1,1 +1,1 @@
-This program prompts user how long they want the password to be. It then generates the password using random letters, numbers, and punctuation.
+Will complete when the program has been finalized.

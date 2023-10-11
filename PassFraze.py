@@ -2,6 +2,9 @@ import random
 import string
 import time
 
+def generate_random_characters(length, characters):
+    return ''.join(random.choice(characters) for _ in range(length))
+
 def generate_weak_password(length):
     with open('common-words.txt', 'r') as file:
         common_words = [line.strip() for line in file]
@@ -12,20 +15,16 @@ def generate_weak_password(length):
     if remaining_length <= 0:
         return chosen_word
 
-    password = chosen_word + ''.join(random.choice(string.digits) for _ in range(remaining_length))
+    password = chosen_word + generate_random_characters(remaining_length, string.digits)
     return password
 
 def generate_medium_password(length):
     characters = string.ascii_letters + string.digits
-        
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
+    return generate_random_characters(length, characters)
         
 def generate_strong_password(length):
     characters = string.ascii_letters + string.digits + string.punctuation
-    
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
+    return generate_random_characters(length, characters)
 
 def test_password_strength(password):
     with open('common-words.txt', 'r') as file:

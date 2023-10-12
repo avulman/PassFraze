@@ -30,65 +30,33 @@ def test_password_strength(password):
     with open('common-words.txt', 'r') as file:
         common_words = [line.strip() for line in file]
 
-    if len(password) < 2:
-        print("Your password is too short. It should be at least 2 characters long.")
-    elif len(password) >= 129:
-        print("Your password is too long. Typical password length shouldn't exceed 128 characters. ")
-    else:
-        has_upper = any(c.isupper() for c in password)
-        has_lower = any(c.islower() for c in password)
-        has_digit = any(c.isdigit() for c in password)
-        has_special = any(c in string.punctuation for c in password)
-        contains_common_word = any(word in password for word in common_words)
+    criteria = [
+        (len(password) >= 12, 3),
+        (any(c.isupper() for c in password), 1),
+        (any(c.islower() for c in password), 1),
+        (any(c.isdigit() for c in password), 1),
+        (any(c in string.punctuation for c in password), 1),
+        (any(c in string.punctuation for c in password), 1),
+        (any(word in password for word in common_words), -3)
+    ]
 
-        if len(password) >= 12:
-            print("Your password is considered strong, as it's at least 12 characters.")
-            print("The types of character's used are just a bonus! More unique characters results in a stronger password!")
-        elif contains_common_word:
-            print("Your password is weak as it contains a dictionary term.")
-        elif has_upper and has_lower and has_digit and has_special:
-            print("Your password is strong.")
-        elif has_upper and has_lower and has_digit:
-            print("Your password is medium in strength. Consider adding unique characters or more characters to make it stronger!")
-        elif has_upper and has_lower and has_special:
-            print("Your password is medium in strength. Consider adding digits or more characters to make it stronger!")
-        elif has_upper and has_digit and has_special:
-            print("Your password is medium in strength. Consider adding lowercase letters or more characters to make it stronger!")
-        elif has_lower and has_digit and has_special:
-            print("Your password is medium in strength. Consider adding uppercase letters or more characters to make it stronger!")
-        elif has_upper and has_lower:
-            print("Your password is medium in strength. Consider adding special characters and digits to make it stronger!")
-        elif has_upper and has_digit:
-            print("Your password is medium in strength. Consider adding lowercase letters and special characters to make it stronger!")
-        elif has_upper and has_special:
-            print("Your password is medium in strength. Consider adding lowercase letters and digits to make it stronger!")
-        elif has_lower and has_digit:
-            print("Your password is medium in strength. Consider adding uppercase letters and special characters to make it stronger!")
-        elif has_lower and has_special:
-            print("Your password is medium in strength. Consider adding uppercase letters and digits to make it stronger!")
-        elif has_digit and has_special:
-            print("Your password is medium in strength. Consider adding lowercase and uppercase letters to make it stronger!")
-        elif has_digit:
-            print("Your password is weak because it's exclusively made up of digits.")
-        elif has_upper:
-            print("Your password is weak because it's exclusively made up of uppercase letters.")
-        elif has_lower:
-            print("Your password is weak because it's exclusively made up of lowercase letters.")
-        elif has_special:
-            print("Your password is weak because it's exclusively made up of special characters.")
-        else:
-            print("Your password is weak, add more characters or consider using a mix of uppercase, lowercase, digits, and special characters.")
+    total_points = sum(points for condition, points in criteria if condition)
+
+    if total_points >= 5:
+        print("Your password is strong.")
+    elif total_points >= 3:
+        print("Your password is medium in strength. Consider adding more unique characters to make it stronger!")
+    else:
+        print("Your password is weak. Add more characters or consider using a mix of uppercase, lowercase, digits, and special characters.")
 
 def generate_password():
     try:
         print("Sweet! Let's generate your very own password!")
-        #time.sleep(2)
+        time.sleep(2)
         print("It's time to decide how long you want your password to be.")
-        #time.sleep(2)
-        print("The perk of having passwords that are at least 12 characters, is that they are already considered strong.")
-        #time.sleep(2)
-        print("So adding a strength level just emphasizes the types of characters are used.")
-        #time.sleep(2)
+        time.sleep(2)
+        print("The perk of having passwords that are at least 12 characters long, is that they aren't weak by default.")
+        time.sleep(2)
         print("Typically passwords also can't exceed 128 characters, so your max character count is 128.")
         length = int(input("Enter your desired length of the password: "))
         if length < 2:
@@ -99,7 +67,7 @@ def generate_password():
             return
         
         print("Now it's time to choose the strength of your password!")
-        #time.sleep(1)
+        time.sleep(1)
         strength = input("Choose password strength (weak, medium, strong): ").lower()
         
         if strength not in ["weak", "medium", "strong"]:
@@ -129,15 +97,15 @@ def test_own_password():
 def main():
     try:
         print("Welcome to PassFraze! This tool allows you to generate passwords and test the strength of your own!")
-        #time.sleep(2)
-        action = input("Would you like to generate a password (enter 'generate') or test your own password strength (enter 'test')?\n").lower()
+        time.sleep(2)
+        action = input("Would you like to generate a password (enter '1') or test the strength of your own password (enter '2')?\n").lower()
 
-        if action == "generate":
+        if action == "1":
             generate_password()
-        elif action == "test":
+        elif action == "2":
             test_own_password()
         else:
-            print("Invalid entry. Please type 'generate' or 'test'.")
+            print("Invalid entry. Please type '1' to generate or '2' to test.")
     except Exception as e:
         print(f"An error occurred: {e}")
 

@@ -55,10 +55,11 @@ def generate_password():
         time.sleep(2)
         print("It's time to decide how long you want your password to be.")
         time.sleep(2)
-        print("The perk of having passwords that are at least 12 characters long, is that they aren't weak by default.")
+        print("The perk of having passwords that are at least 12 characters long, is that they typically aren't considered weak by default.")
         time.sleep(2)
         print("Typically passwords also can't exceed 128 characters, so your max character count is 128.")
-        length = int(input("Enter your desired length of the password: "))
+        time.sleep(2)
+        length = int(input("Enter the desired length of your password: "))
         if length < 2:
             print("Sorry, your password length should be at least 2 characters.")
             return
@@ -68,20 +69,23 @@ def generate_password():
         
         print("Now it's time to choose the strength of your password!")
         time.sleep(1)
-        strength = input("Choose password strength (weak, medium, strong): ").lower()
+        strength = input("Choose password strength weak (enter '1'), medium (enter '2'), or strong (enter '3'): ").lower()
         
-        if strength not in ["weak", "medium", "strong"]:
-            print("Invalid strength level. Please choose from 'weak', 'medium', or 'strong'.")
+        if strength not in ["1", "2", "3"]:
+            print("Invalid strength level. Please choose from weak (enter '1'), medium (enter '2'), or strong (enter '3').")
             return
         
-        if strength == "weak":
+        if strength == "1":
+            print("Generating a weak password...")
             password = generate_weak_password(length)
-        elif strength == "medium":
+        elif strength == "2":
+            print("Generating a medium strength password...")
             password = generate_medium_password(length)
-        elif strength == "strong":
+        elif strength == "3":
+            print("Generating a strong password...")
             password = generate_strong_password(length)
         else:
-            raise ValueError("Invalid strength level. Please choose from 'weak', 'medium', or 'strong'.")
+            raise ValueError("Invalid strength level. Please choose from weak (enter '1'), medium (enter '2'), or strong (enter '3').")
         
         print("Generated Password: ", password)
 
@@ -92,6 +96,7 @@ def test_own_password():
     print("Let's test that password!")
     time.sleep(1)
     user_password = input("Enter the password that you would like to test: ")
+    print("Analyzing password...")
     test_password_strength(user_password)
 
 def main():

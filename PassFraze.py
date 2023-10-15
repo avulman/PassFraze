@@ -2,6 +2,21 @@ import random
 import string
 import time
 
+def crack_password(password):
+    start_time = time.time()
+    attempts = 0
+    while True:
+        attempt = generate_random_characters(len(password), string.ascii_letters + string.digits + string.punctuation)
+        attempts += 1
+        if attempt == password:
+            end_time = time.time()
+            time_taken = end_time - start_time
+            print(f"\nYour password was: {attempt}")
+            print(f"Password cracked on attempt number {attempts:,} and in {time_taken:.2f} seconds.")
+            break
+        else:
+            print(f"Attempt {attempts}: {attempt}")
+
 def generate_random_characters(length, characters):
     return ''.join(random.choice(characters) for _ in range(length))
 
@@ -52,13 +67,13 @@ def test_password_strength(password):
 def generate_password():
     try:
         print("Sweet! Let's generate your very own password!")
-        time.sleep(2)
+        #time.sleep(2)
         print("It's time to decide how long you want your password to be.")
-        time.sleep(2)
+        #time.sleep(2)
         print("The perk of having passwords that are at least 12 characters long, is that they typically aren't considered weak by default.")
-        time.sleep(2)
+        #time.sleep(2)
         print("Typically passwords also can't exceed 128 characters, so your max character count is 128.")
-        time.sleep(2)
+        #time.sleep(2)
         length = int(input("Enter the desired length of your password: "))
         if length < 2:
             print("Sorry, your password length should be at least 2 characters.")
@@ -68,7 +83,7 @@ def generate_password():
             return
         
         print("Now it's time to choose the strength of your password!")
-        time.sleep(1)
+        #time.sleep(1)
         strength = input("Choose password strength weak (enter '1'), medium (enter '2'), or strong (enter '3'): ").lower()
         
         if strength not in ["1", "2", "3"]:
@@ -89,20 +104,39 @@ def generate_password():
         
         print("Generated Password: ", password)
 
+        crack_option = input("Would you like me to attempt cracking this password? (enter 'yes' or 'no')")
+        if crack_option == "yes":
+            crack_password(password)
+        elif crack_option == "no":
+            print("No worries.")
+        else:
+            print("I didn't get that. Would you like me to attempt cracking this password? Please enter 'yes' or 'no' ")
+
     except ValueError:
         print("Please enter a valid integer for the password length.")
 
 def test_own_password():
     print("Let's test that password!")
-    time.sleep(1)
+    #time.sleep(1)
     user_password = input("Enter the password that you would like to test: ")
     print("Analyzing password...")
     test_password_strength(user_password)
 
+    while True:
+        crack_option = input("Would you like me to attempt cracking this password? (enter 'yes' or 'no')\n")
+        if crack_option == "yes":
+            crack_password(user_password)
+            break
+        elif crack_option == "no":
+            print("No problem! Terminating program...")
+            break
+        else:
+            print("\nSorry, I didn't get that.")
+
 def main():
     try:
         print("Welcome to PassFraze! This tool allows you to generate passwords and test the strength of your own!")
-        time.sleep(2)
+        #time.sleep(2)
         action = input("Would you like to generate a password (enter '1') or test the strength of your own password (enter '2')?\n").lower()
 
         if action == "1":

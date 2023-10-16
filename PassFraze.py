@@ -2,6 +2,9 @@ import random
 import string
 import time
 
+# TODO: If a user chooses a password with a common word, provide a warning and suggest alternatives.
+# before automatically analyzing it as weak.
+
 def crack_password(password):
     start_time = time.time()
     attempts = 0
@@ -11,11 +14,12 @@ def crack_password(password):
         if attempt == password:
             end_time = time.time()
             time_taken = end_time - start_time
+            print(f"Attempt {attempts:,}: {attempt}")
             print(f"\nYour password was: {attempt}")
-            print(f"Password cracked on attempt number {attempts:,} and in {time_taken:.2f} seconds.")
+            print(f"It took {attempts:,} attempts and {time_taken:.2f} seconds to crack your password.")
             break
         else:
-            print(f"Attempt {attempts}: {attempt}")
+            print(f"Attempt {attempts:,}: {attempt}")
 
 def generate_random_characters(length, characters):
     return ''.join(random.choice(characters) for _ in range(length))
@@ -25,8 +29,11 @@ def generate_weak_password(length):
         common_words = [line.strip() for line in file]
 
     chosen_word = random.choice(common_words)
-    remaining_length = length - len(chosen_word)
 
+    while len(chosen_word) > length:
+        chosen_word = chosen_word[:-1]
+
+    remaining_length = length - len(chosen_word)
     if remaining_length <= 0:
         return chosen_word
 
@@ -102,15 +109,15 @@ def generate_password():
         else:
             raise ValueError("Invalid strength level. Please choose from weak (enter '1'), medium (enter '2'), or strong (enter '3').")
         
-        print("Generated Password: ", password)
+        print("Generated Password:", password)
 
-        crack_option = input("Would you like me to attempt cracking this password? (enter 'yes' or 'no')")
-        if crack_option == "yes":
+        crack_option = input("Would you like me to attempt cracking this password? (enter '1' for yes or '2' for no): ")
+        if crack_option == "1":
             crack_password(password)
-        elif crack_option == "no":
-            print("No worries.")
+        elif crack_option == "2":
+            print("No problem! Terminating program...")
         else:
-            print("I didn't get that. Would you like me to attempt cracking this password? Please enter 'yes' or 'no' ")
+            print("Invalid entry.")
 
     except ValueError:
         print("Please enter a valid integer for the password length.")
@@ -123,15 +130,15 @@ def test_own_password():
     test_password_strength(user_password)
 
     while True:
-        crack_option = input("Would you like me to attempt cracking this password? (enter 'yes' or 'no')\n")
-        if crack_option == "yes":
+        crack_option = input("Would you like me to attempt cracking this password? (enter '1' for yes or '2' for no): \n")
+        if crack_option == "1":
             crack_password(user_password)
             break
-        elif crack_option == "no":
+        elif crack_option == "2":
             print("No problem! Terminating program...")
             break
         else:
-            print("\nSorry, I didn't get that.")
+            print("Invalid entry.")
 
 def main():
     try:

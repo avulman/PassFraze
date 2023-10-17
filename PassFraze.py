@@ -2,6 +2,11 @@ import random
 import string
 import time
 
+#TODO long-term: allow users the option to save passwords and add them from CLI to google docs or dropbox .txt file
+#TODO long-term: encrypt passwords using a library such as hashlib
+#TODO long-term: implement brute force protection by limiting login attempts CAPTCHA challenges to prevent bots
+#TODO long-term: add support for MFA
+
 def crack_password(password=None):
     if not password:
         password = input("Enter the password you would like me to crack: ")

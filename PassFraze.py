@@ -2,9 +2,6 @@ import random
 import string
 import time
 
-# TODO: If a user chooses a password with a common word, provide a warning and suggest alternatives.
-# before automatically analyzing it as weak.
-
 def crack_password(password=None):
     if not password:
         password = input("Enter the password you would like me to crack: ")
@@ -124,11 +121,39 @@ def generate_password():
     except ValueError:
         print("Please enter a valid integer for the password length.")
 
+def contains_common_word(password):
+    with open('common-words.txt', 'r') as file:
+        common_words = [line.strip() for line in file]
+
+    for word in common_words:
+        if word.lower() in password.lower():
+            return True
+
+    return False
+
 def test_own_password():
     print("Let's test that password!")
-    #time.sleep(1)
-    user_password = input("Enter the password that you would like to test: ")
-    print("Analyzing password...")
+
+    while True:
+        user_password = input("Enter the password that you would like to test: ")
+
+        if contains_common_word(user_password):
+            print("Your password contains a common word, and will therefore be considered weaker.")
+            action = input("Would you like to: proceed (enter '1'), choose a different password (enter '2'), or exit (enter) '3'): ").lower()
+
+            if action == "1":
+                break
+            elif action == "2":
+                continue
+            elif action == "3":
+                print("Terminating program...")
+                return
+            else:
+                print("Invalid entry.")
+        else:
+            print("Analyzing password...")
+            break
+
     test_password_strength(user_password)
 
     while True:

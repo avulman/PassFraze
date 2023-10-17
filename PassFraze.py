@@ -5,7 +5,9 @@ import time
 # TODO: If a user chooses a password with a common word, provide a warning and suggest alternatives.
 # before automatically analyzing it as weak.
 
-def crack_password(password):
+def crack_password(password=None):
+    if not password:
+        password = input("Enter the password you would like me to crack: ")
     start_time = time.time()
     attempts = 0
     while True:
@@ -111,7 +113,7 @@ def generate_password():
         
         print("Generated Password:", password)
 
-        crack_option = input("Would you like me to attempt cracking this password? (enter '1' for yes or '2' for no): ")
+        crack_option = input("Would you like me to attempt cracking this password? If yes (enter '1') if no (enter '2'): ")
         if crack_option == "1":
             crack_password(password)
         elif crack_option == "2":
@@ -130,7 +132,7 @@ def test_own_password():
     test_password_strength(user_password)
 
     while True:
-        crack_option = input("Would you like me to attempt cracking this password? (enter '1' for yes or '2' for no): \n")
+        crack_option = input("Would you like me to attempt cracking this password? If yes (enter '1') if no (enter '2'): ")
         if crack_option == "1":
             crack_password(user_password)
             break
@@ -142,14 +144,16 @@ def test_own_password():
 
 def main():
     try:
-        print("Welcome to PassFraze! This tool allows you to generate passwords and test the strength of your own!")
+        print("Welcome to PassFraze! This tool allows you to generate passwords, test the strength of your own passwords, and even cracks passwords!")
         #time.sleep(2)
-        action = input("Would you like to generate a password (enter '1') or test the strength of your own password (enter '2')?\n").lower()
+        action = input("Would you like to generate a password (enter '1'), test the strength of your own password (enter '2'), or watch me crack a ('enter 3') a password?\n").lower()
 
         if action == "1":
             generate_password()
         elif action == "2":
             test_own_password()
+        elif action == "3":
+            crack_password()
         else:
             print("Invalid entry. Please type '1' to generate or '2' to test.")
     except Exception as e:

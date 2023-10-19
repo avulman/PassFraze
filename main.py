@@ -1,6 +1,16 @@
+import eel
 import random
 import string
 import time
+
+eel.init('gui')
+
+@eel.expose
+def App(): # app main function
+    print("Application Running")
+App()
+
+eel.start('index.html', size=(500, 600))
 
 #TODO long-term: allow users the option to save passwords and add them from CLI to google docs or dropbox .txt file
 #TODO long-term: encrypt passwords using a library such as hashlib

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassFraze</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <h1>Welcome to PassFraze!</h1>
+
+    <div class="password-container">
+        <h2>Current Password:</h2>
+        <div id="current-password"></div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="generatePassword()">Generate Password</button>
+        <button onclick="testPasswordStrength()">Test Password Strength</button>
+        <button onclick="crackPassword()">Crack Password</button>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

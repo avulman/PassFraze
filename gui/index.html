@@ -6,20 +6,31 @@
     <title>PassFraze</title>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-    <h1>Welcome to PassFraze!</h1>
+    <header class="header">
+        <nav class="nav"> 
+            <a href="#">About</a>
+            <a href="#">Generator</a>
+            <a href="#">Analyzer</a>
+            <a href="#">Guesser</a>
+        </nav>
+    </header>
+    <div class="content"> 
+        <h1>Welcome to PassFraze!</h1>
 
-    <div class="password-container">
-        <h2>Current Password:</h2>
-        <div id="current-password"></div>
+        <div class="password-container">
+            <h2>What would you like to do today?</h2>
+        </div>
+
+        <div class="button-container">
+            <button class="button" onclick="generatePassword()">generate random password</button>
+            <button class="button" onclick="testPasswordStrength()">analyze your password</button>
+            <button class="button" onclick="crackPassword()">crack a password</button>
+        </div>
     </div>
 
-    <div class="button-container">
-        <button onclick="generatePassword()">Generate Password</button>
-        <button onclick="testPasswordStrength()">Test Password Strength</button>
-        <button onclick="crackPassword()">Crack Password</button>
-    </div>
-
-    <script src="index.js"></script>
+    <script src="eel.js"></script>
 </body>
+
 </html>

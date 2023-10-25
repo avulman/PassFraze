@@ -1,7 +1,5 @@
-import eel
-import random
-import string
-import time
+"""import eel
+
 
 eel.init('gui')
 
@@ -10,7 +8,11 @@ def App(): # app main function
     print("Application Running")
 App()
 
-eel.start('index.html', size=(500, 600))
+eel.start('index.html', size=(500, 600))"""
+
+import random
+import string
+import time
 
 def crack_password(password=None):
     if not password:

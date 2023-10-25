@@ -53,6 +53,10 @@ main {
   box-shadow: 0 2px 4px rgba
 }
 
+.about_section img {
+  width: 40px;
+}
+
 button {
   background-color: #4CAF50;
   border: none;

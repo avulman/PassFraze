@@ -4,33 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PassFraze</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
-
 <body>
-    <header class="header">
-        <nav class="nav"> 
-            <a href="#">About</a>
-            <a href="#">Generator</a>
-            <a href="#">Analyzer</a>
-            <a href="#">Guesser</a>
-        </nav>
+    <header>
+        <div class="header_content">
+            <h1><a href="index.html">PassFraze</a></h1>
+            <nav>
+                <a href="about.html" class="header_buttons">About</a>
+                <a href="faq.html" class="header_buttons">FAQ</a>
+            </nav>
+        </div>
     </header>
-    <div class="content"> 
-        <h1>Welcome to PassFraze!</h1>
-
-        <div class="password-container">
-            <h2>What would you like to do today?</h2>
+        <div class="button_container">
+            <section id="buttons">
+                <button id="generate">Generate Password</button>
+                <button id="test">Test Password Strength</button>
+                <button id="crack">Crack Password</button>
+            </section>
         </div>
-
-        <div class="button-container">
-            <button class="button" onclick="generatePassword()">generate random password</button>
-            <button class="button" onclick="testPasswordStrength()">analyze your password</button>
-            <button class="button" onclick="crackPassword()">crack a password</button>
-        </div>
-    </div>
-
-    <script src="eel.js"></script>
+    </main>
 </body>
-
 </html>

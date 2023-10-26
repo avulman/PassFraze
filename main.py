@@ -1,15 +1,3 @@
-"""import eel
-
-
-eel.init('gui')
-
-@eel.expose
-def App(): # app main function
-    print("Application Running")
-App()
-
-eel.start('index.html', size=(500, 600))"""
-
 import random
 import string
 import time

@@ -16,4 +16,33 @@
                 <a href="index.html" class="header_button_3">4 in 1 Tool</a>
             </nav>
         </div>
+        
+    <h1>Password Generator</h1>
+
+    <form action="/generate" method="post">
+        <label for="length">Password Length:</label>
+        <input type="number" id="length" name="length" min="1" value="12"><br>
+
+        <input type="checkbox" id="uppercase" name="uppercase" checked>
+        <label for="uppercase">Include Uppercase</label><br>
+
+        <input type="checkbox" id="lowercase" name="lowercase" checked>
+        <label for="lowercase">Include Lowercase</label><br>
+
+        <input type="checkbox" id="digits" name="digits" checked>
+        <label for="digits">Include Digits</label><br>
+
+        <input type="checkbox" id="special" name="special" checked>
+        <label for="special">Include Special Characters</label><br>
+
+        <button type="submit">Generate Password</button>
+    </form>
+
+    {% if password %}
+        <h2>Generated Password:</h2>
+        <p>{{ password }}</p>
+    {% endif %}
+
+</body>
+</html>
     </header>

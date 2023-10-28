@@ -1,11 +1,11 @@
 document.getElementById('generate').addEventListener('click', function() {
-    window.location.href = 'generate.html';
+    window.location.href = '/generate';
 });
 
 document.getElementById('test').addEventListener('click', function() {
-    window.location.href = 'test.html';
+    window.location.href = '/test';
 });
 
 document.getElementById('crack').addEventListener('click', function() {
-    window.location.href = 'crack.html';
+    window.location.href = '/crack';
 });

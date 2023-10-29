@@ -9,6 +9,18 @@ app = Flask(__name__, static_url_path='/gui', static_folder='gui')
 def index():
     return render_template('index.html')
 
+@app.route('/generate_home')
+def generate_home():
+    return render_template('generate.html')
+
+@app.route('/test_home')
+def test_home():
+    return render_template('test.html')
+
+@app.route('/crack_home')
+def crack_home():
+    return render_template('crack.html')
+
 @app.route('/generate', methods=['POST'])
 def generate():
     length = int(request.form['length'])
@@ -27,6 +39,9 @@ def generate():
         characters += string.digits
     if include_special:
         characters += '!@#$%^&*()_+[]{}|;:,.<>?'
+
+    if not characters:
+        return render_template('generate.html', error="Choose at least one option to generate.")
 
     password = generate_password(length, characters)
     return render_template('generate.html', password=password)

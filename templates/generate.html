@@ -35,18 +35,20 @@
 
             <div class="password__generate--option"><input type="checkbox" id="special" name="special">
             <label for="special">Special Characters</label><br></div>
-
-            <button type="submit">Generate Password</button>
+        </div>
+            <div class="password__generate--submit"><button type="submit">Generate</button>
+            </div>
         </form>
-    </div>    
+        
 
-    <div class="password__generate--result">{% if error %}
-    <p>{{ error }}</p>
-{% else %}
-    {% if password %}
-        <p>Generated password: {{ password }}</p>
+    <div class="password__generate--result">
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        {% if password %}
+            <p>Generated password: {{ password }}</p>
+        {% endif %}
     {% endif %}
-{% endif %}
             </div>
         </div>
     </body>

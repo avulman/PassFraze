@@ -122,6 +122,14 @@ button:hover {
   padding-left: 1%;
 }
 
+.password__generate--submit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px;
+  scale: 90%;
+}
+
 .password__generate--option{
   display: flex;
   align-items: center;
@@ -139,6 +147,15 @@ button:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.password__generate--result{
+  margin: 10px auto;
+  max-width: 500px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  word-break: break-all;
 }
 
 #results {

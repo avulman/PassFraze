@@ -11,11 +11,11 @@ document.getElementById('crack').addEventListener('click', function() {
 });*/
 
 document.getElementById('navigate_generate').addEventListener('click', function() {
-    window.location.href = '/generate_home';
+    window.location.href = '/generate';
 });
 
 document.getElementById('navigate_test').addEventListener('click', function() {
-    window.location.href = '/test_home';
+    window.location.href = '/test';
 });
 
 document.getElementById('navigate_crack').addEventListener('click', function() {

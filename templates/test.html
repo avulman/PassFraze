@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About PassFraze</title>
-    <link rel="stylesheet" href="gui/style.css">
+    <link rel="stylesheet" href="/gui/style.css">
 </head>
 <body>
     <header>
@@ -17,3 +17,26 @@
             </nav>
         </div>
     </header>
+    <body>
+        <div class="password__body--h1"><h1>Input a Password to Test</h1></div>
+        <div class="password__test__options--container">
+            <form action="/test/pressed" method="post">
+                <div class="input__box"><input type="text" id="password" name="password"  required><br><br></div>
+                <div class="password__submit"><button type="submit">Test</button></div></div>
+                {% if password %}
+                <div class="password__result"><p>PassFraze Strength Rating: <b>{{ strength }}</b></p></div>
+                <div class="password__test--center"><p>The password <b>'{{ password }}'</b> is categorized as <b>{{ strength|lower }}</b> due to the following reasons: </p></div>
+                <div class="password__test--center"><ul>
+                            {% for item in analysis %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul></div>
+                        <div class="password__test--center"><p>Your total is {{ total }} points.</p>
+                    {% endif %}</div>
+            </form>
+        </div>
+        <script>
+            document.getElementById("password").focus();
+        </script>
+    </body>
+</html>

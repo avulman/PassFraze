@@ -122,7 +122,27 @@ button:hover {
   padding-left: 1%;
 }
 
-.password__generate--submit{
+.password__test--center{
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+}
+
+.password__test__options--container,
+.input__box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input__box{
+  scale: 150%;
+}
+
+.password__submit{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,7 +150,7 @@ button:hover {
   scale: 90%;
 }
 
-.password__generate--option{
+.password__option{
   display: flex;
   align-items: center;
 }
@@ -141,17 +161,17 @@ button:hover {
   height: 100%;
 }
 
-.password__generate__body--h1,
-.password__generate--result{
+.password__body--h1,
+.password__result{
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-.password__generate--result{
+.password__result{
   margin: 10px auto;
-  max-width: 500px;
+  max-width: 1000px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;

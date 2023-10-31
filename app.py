@@ -3,17 +3,30 @@ import random
 import string
 import time
 
+with open('common-words.txt', 'r') as file:
+        common_words = [line.strip() for line in file]
+
+def contains_common_word(password):
+        with open('common-words.txt', 'r') as file:
+            common_words = [line.strip() for line in file]
+
+        for word in common_words:
+            if word.lower() in password.lower():
+                return True
+
+        return False
+
 app = Flask(__name__, static_url_path='/gui', static_folder='gui')
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/generate_home')
+@app.route('/generate')
 def generate_home():
     return render_template('generate.html')
 
-@app.route('/test_home')
+@app.route('/test')
 def test_home():
     return render_template('test.html')
 
@@ -21,7 +34,7 @@ def test_home():
 def crack_home():
     return render_template('crack.html')
 
-@app.route('/generate', methods=['POST'])
+@app.route('/generate/pressed', methods=['POST'])
 def generate():
     length = int(request.form['length'])
     include_uppercase = 'uppercase' in request.form
@@ -50,9 +63,40 @@ def generate_password(length, characters):
     password = ''.join(random.choice(characters) for _ in range(length))
     return password
 
-@app.route('/test')
+@app.route('/test/pressed', methods=['POST'])
 def test():
-    return render_template('test.html')
+    password = request.form['password']
+
+    criteria = [
+        (len(password) >= 12, "Contains at least 12 characters", 1),
+        (any(c.isupper() for c in password), "Contains an uppercase letter", 1),
+        (any(c.islower() for c in password), "Contains a lowercase letter", 1),
+        (any(c.isdigit() for c in password), "Contains a digit", 1),
+        (any(c in string.punctuation for c in password), "Contains a special character", 1),
+        (len(set(password)) >= len(password) * 0.7, "Has high character diversity", 1),
+        (any(c.isalpha() for c in password), "Contains an alphabetic character", 1),
+        (any(c.isnumeric() for c in password), "Contains a numeric character", 1),
+        (any(c in "!@#$%^&*()-_+=[]{}|;:'\",.<>?~" for c in password), "Contains a special character", 2)
+    ]
+
+    analysis = []
+    total_points = 0
+
+    for condition, description, points in criteria:
+        if condition:
+            total_points += points
+            analysis.append(f'✅ {description} (+{points} point)')
+        else:
+            analysis.append(f'❌ {description} (0 points)')
+
+    if total_points >= 7:
+        strength = "Strong"
+    elif total_points >= 4:
+        strength = "Medium"
+    else:
+        strength = "Weak"
+
+    return render_template('test.html', strength=strength, password=password, analysis=analysis, total=total_points)
 
 @app.route('/crack')
 def crack():
@@ -117,36 +161,3 @@ def generate_medium_password(length):
 def generate_strong_password(length):
     characters = string.ascii_letters + string.digits + string.punctuation
     return generate_random_characters(length, characters)
-
-def test_password_strength(password):
-    with open('common-words.txt', 'r') as file:
-        common_words = [line.strip() for line in file]
-
-    criteria = [
-        (len(password) >= 12, 3),
-        (any(c.isupper() for c in password), 1),
-        (any(c.islower() for c in password), 1),
-        (any(c.isdigit() for c in password), 1),
-        (any(c in string.punctuation for c in password), 1),
-        (any(c in string.punctuation for c in password), 1),
-        (any(word in password for word in common_words), -3)
-    ]
-
-    total_points = sum(points for condition, points in criteria if condition)
-
-    if total_points >= 5:
-        print("Your password is strong.")
-    elif total_points >= 3:
-        print("Your password is medium in strength. Consider adding more unique characters to make it stronger!")
-    else:
-        print("Your password is weak. Add more characters or consider using a mix of uppercase, lowercase, digits, and special characters.")
-
-def contains_common_word(password):
-    with open('common-words.txt', 'r') as file:
-        common_words = [line.strip() for line in file]
-
-    for word in common_words:
-        if word.lower() in password.lower():
-            return True
-
-    return False

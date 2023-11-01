@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import random
 import string
 import time
+import re
+import math
 
 with open('common-words.txt', 'r') as file:
         common_words = [line.strip() for line in file]
@@ -15,6 +17,59 @@ def contains_common_word(password):
                 return True
 
         return False
+
+def contains_date_pattern(password):
+    date_patterns = [
+        r'\d{4}-\d{2}-\d{2}',  # YYYY-MM-DD
+        r'\d{2}-\d{2}-\d{4}',  # MM-DD-YYYY
+        r'\d{2}/\d{2}/\d{4}',  # MM/DD/YYYY
+        r'\d{4}/\d{2}/\d{2}',  # YYYY/MM/DD
+        r'\d{2}-\d{2}-\d{2}',  # MM-DD-YY
+        r'\d{2}/\d{2}/\d{2}',  # MM/DD/YY
+    ]
+
+    for pattern in date_patterns:
+        if re.search(pattern, password):
+            return True
+
+    return False
+
+def calculate_unique_characters(password):
+    char_frequency = {}
+    for char in password:
+        char_frequency[char] = char_frequency.get(char, 0) + 1
+
+    unique_characters = 0
+    password_length = len(password)
+    for char, frequency in char_frequency.items():
+        probability = frequency / password_length
+        unique_characters -= probability * math.log2(probability)
+
+    return unique_characters
+
+def contains_leet_speak(password):
+    leet_dict = {
+        'a': ['4', '@'],
+        'b': ['8'],
+        'c': ['(', '<', '{', '['],
+        'e': ['3'],
+        'g': ['9', '6'],
+        'h': ['#'],
+        'i': ['1', '!', '|'],
+        'l': ['1', '|', '7'],
+        'o': ['0'],
+        's': ['5', '$'],
+        't': ['+', '7'],
+        'z': ['2']
+    }
+
+    modified_password = password.lower()
+
+    for char, substitutions in leet_dict.items():
+        for substitution in substitutions:
+            modified_password = modified_password.replace(substitution, char)
+
+    return modified_password != password.lower() and contains_common_word(modified_password)
 
 app = Flask(__name__, static_url_path='/gui', static_folder='gui')
 
@@ -68,15 +123,15 @@ def test():
     password = request.form['password']
 
     criteria = [
-        (len(password) >= 12, "Contains at least 12 characters", 1),
+        (len(password) >= 12, "At least 12 characters", 1),
         (any(c.isupper() for c in password), "Contains an uppercase letter", 1),
         (any(c.islower() for c in password), "Contains a lowercase letter", 1),
         (any(c.isdigit() for c in password), "Contains a digit", 1),
         (any(c in string.punctuation for c in password), "Contains a special character", 1),
-        (len(set(password)) >= len(password) * 0.7, "Has high character diversity", 1),
-        (any(c.isalpha() for c in password), "Contains an alphabetic character", 1),
-        (any(c.isnumeric() for c in password), "Contains a numeric character", 1),
-        (any(c in "!@#$%^&*()-_+=[]{}|;:'\",.<>?~" for c in password), "Contains a special character", 2)
+        (not contains_common_word(password), "Contains a common word", 1),
+        (not contains_date_pattern(password), "Avoids date patterns", 1),
+        (calculate_unique_characters(password) > 2.5, "Mix of unique characters", 1),
+        (not contains_leet_speak(password), "Avoids leet speak", 1)
     ]
 
     analysis = []
@@ -87,7 +142,7 @@ def test():
             total_points += points
             analysis.append(f'✅ {description} (+{points} point)')
         else:
-            analysis.append(f'❌ {description} (0 points)')
+            analysis.append(f'❌ {description}')
 
     if total_points >= 7:
         strength = "Strong"

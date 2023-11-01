@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="header_content">
-            <h1><a href="/">PassFraze</a></h1>
+            <div class="PassFraze__main"><h1><a href="/">PassFraze</a></h1></div>
             <nav>
                 <a href="/about" class="header_buttons">About</a>
                 <a href="/faq" class="header_buttons">FAQ</a>
@@ -24,15 +24,17 @@
                 <div class="input__box"><input type="text" id="password" name="password"  required><br><br></div>
                 <div class="password__submit"><button type="submit">Test</button></div></div>
                 {% if password %}
-                <div class="password__result"><p>PassFraze Strength Rating: <b>{{ strength }}</b></p></div>
+                <div class="password__result"><p>PassFraze Strength Rating: <b>{{ strength|lower }}</b></p></div>
                 <div class="password__test--center"><p>The password <b>'{{ password }}'</b> is categorized as <b>{{ strength|lower }}</b> due to the following reasons: </p></div>
                 <div class="password__test--center"><ul>
                             {% for item in analysis %}
                                 <li>{{ item }}</li>
                             {% endfor %}
                         </ul></div>
-                        <div class="password__test--center"><p>Your total is {{ total }} points.</p>
-                    {% endif %}</div>
+                        <div class="password__test--center">
+                            <p>Your total is {{ total }} {% if total == 1 %}point.{% else %}points.{% endif %}</p>
+                        </div>
+                    {% endif %}
             </form>
         </div>
         <script>

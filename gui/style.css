@@ -48,8 +48,6 @@ main {
   justify-content: center;
   align-items: center;
   padding: 5vh;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .about_section {
@@ -95,6 +93,7 @@ nav {
   margin: 0.5rem 0.5rem;
   cursor: pointer;
   border-radius: 5px;
+  width: 35px;
 }
 
 .header_buttons:hover {
@@ -113,6 +112,10 @@ nav {
   margin: 0.5rem 0.5rem;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.navigate_buttons{
+  width: 234px;
 }
 
 .header_button_3:hover {
@@ -148,6 +151,12 @@ button:hover {
 
 .input__box{
   scale: 150%;
+}
+
+.password__crack--info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .password__submit{

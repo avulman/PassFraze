@@ -153,7 +153,7 @@ def test():
 
     return render_template('test.html', strength=strength, password=password, analysis=analysis, total=total_points)
 
-@app.route('/crack')
+@app.route('/crack/pressed', methods=['POST'])
 def crack():
     return render_template('crack.html')
 

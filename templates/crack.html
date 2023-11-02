@@ -13,20 +13,29 @@
             <nav>
                 <a href="/about" class="header_buttons">About</a>
                 <a href="/faq" class="header_buttons">FAQ</a>
-                <a href="/" class="header_button_3">4 in 1 Tool</a>
+                <a href="/" class="header_button_3">Home</a>
             </nav>
         </div>
     </header>
     <body>
-        <div class="password__crack--info">
-            <p>PassFraze has a built in tool capable of running a script to attempt every possible permutation of your password.</p>
+        <div class="password__utility--info">
+            <p>The PassFraze crack utility script will iterate through each possible permutation until it correctly guesses your password. This tool is intended to demonstrate the time in which an account with infinite login attempts can be accessed, if there is no restraint on login attempts.</p>
         </div>
         <div class="password__body--h1"><h1>Input a Password to Crack</h1></div>
         <div class="password__test__options--container">
             <form action="/crack/pressed" method="post">
                 <div class="input__box"><input type="text" id="password" name="password"  required><br><br></div>
                 <div class="password__submit"><button type="submit">Run Script</button></div></div>
-            </form>
-        </div>
-    </body>
+                {% if password %}
+                <div class="password__result"><p>Attempting to crack: <b>'{{ password }}'</b></p></div>
+                <div class="password__result"><p>This may take up to <b>{{ time_forecasted }} seconds (worst case scenario, it will likely take way less time.) </b></p></div>
+                {% endif %}
+                {% if time_taken is defined %}
+                <div class="password__result"><p>Time elapsed: <b>{{ time_taken }} seconds</b></p></div>
+                <div class="password__result"><p>Total number of attempts: <b>{{ attempts }}</b></p></div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</body>
 </html>

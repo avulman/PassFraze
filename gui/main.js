@@ -19,5 +19,5 @@ document.getElementById('navigate_test').addEventListener('click', function() {
 });
 
 document.getElementById('navigate_crack').addEventListener('click', function() {
-    window.location.href = '/crack_home';
+    window.location.href = '/crack';
 });

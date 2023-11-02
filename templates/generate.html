@@ -13,10 +13,13 @@
             <nav>
                 <a href="/about" class="header_buttons">About</a>
                 <a href="/faq" class="header_buttons">FAQ</a>
-                <a href="/" class="header_button_3">4 in 1 Tool</a>
+                <a href="/" class="header_button_3">Home</a>
             </nav>
         </div>
     </header>
+    <div class="password__utility--info">
+        <p>The PassFraze generate utility allows you to generate a strong random password, and tailor it with your own preferences. Simply input a length, and select the options you would like to be included in your unique password.</p>
+    </div>
     <div class="password__generate--body">    
     <div class="password__body--h1"><h1>Customize Your Password</h1></div>
     <div class="password__generate__options--container">
@@ -45,7 +48,7 @@
         <p>{{ error }}</p>
     {% else %}
         {% if password %}
-            <p>Generated password: {{ password }}</p>
+            <p>Generated password: <b>'{{ password }}'</b></p>
         {% endif %}
     {% endif %}
             </div>

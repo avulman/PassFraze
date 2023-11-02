@@ -8,6 +8,15 @@ import math
 with open('common-words.txt', 'r') as file:
         common_words = [line.strip() for line in file]
 
+def time_forecasted(password):
+    characters = 94
+    guesses_per_second = 11575 / characters
+
+    permutations = characters ** len(password)
+    seconds_required = permutations / guesses_per_second
+
+    return seconds_required
+    
 def contains_common_word(password):
         with open('common-words.txt', 'r') as file:
             common_words = [line.strip() for line in file]
@@ -71,6 +80,9 @@ def contains_leet_speak(password):
 
     return modified_password != password.lower() and contains_common_word(modified_password)
 
+def generate_random_characters(length, characters):
+    return ''.join(random.choice(characters) for _ in range(length))
+
 app = Flask(__name__, static_url_path='/gui', static_folder='gui')
 
 @app.route('/')
@@ -85,7 +97,7 @@ def generate_home():
 def test_home():
     return render_template('test.html')
 
-@app.route('/crack_home')
+@app.route('/crack')
 def crack_home():
     return render_template('crack.html')
 
@@ -155,7 +167,22 @@ def test():
 
 @app.route('/crack/pressed', methods=['POST'])
 def crack():
-    return render_template('crack.html')
+    password = request.form['password']
+    start_time = time.time()
+    attempts = 0
+    forecasted_time = time_forecasted(password)
+    attempt = None
+    time_taken = None
+
+    while True:
+        attempt = generate_random_characters(len(password), string.ascii_letters + string.digits + string.punctuation)
+        attempts += 1
+        if attempt == password:
+            end_time = time.time()
+            time_taken = end_time - start_time
+            break
+
+    return render_template('crack.html', password=password, attempt=attempt, attempts=attempts, time_forecasted=forecasted_time, time_taken=time_taken)
 
 @app.route('/about')
 def about():
@@ -171,48 +198,3 @@ def passfraze():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-def crack_password(password=None):
-    if not password:
-        password = input("Enter the password you would like me to crack: ")
-    start_time = time.time()
-    attempts = 0
-    while True:
-        attempt = generate_random_characters(len(password), string.ascii_letters + string.digits + string.punctuation)
-        attempts += 1
-        if attempt == password:
-            end_time = time.time()
-            time_taken = end_time - start_time
-            print(f"Attempt {attempts:,}: {attempt}")
-            print(f"\nYour password was: {attempt}")
-            print(f"It took {attempts:,} attempts and {time_taken:.2f} seconds to crack your password.")
-            break
-        else:
-            print(f"Attempt {attempts:,}: {attempt}")
-
-def generate_random_characters(length, characters):
-    return ''.join(random.choice(characters) for _ in range(length))
-
-def generate_weak_password(length):
-    with open('common-words.txt', 'r') as file:
-        common_words = [line.strip() for line in file]
-
-    chosen_word = random.choice(common_words)
-
-    while len(chosen_word) > length:
-        chosen_word = chosen_word[:-1]
-
-    remaining_length = length - len(chosen_word)
-    if remaining_length <= 0:
-        return chosen_word
-
-    password = chosen_word + generate_random_characters(remaining_length, string.digits)
-    return password
-
-def generate_medium_password(length):
-    characters = string.ascii_letters + string.digits
-    return generate_random_characters(length, characters)
-        
-def generate_strong_password(length):
-    characters = string.ascii_letters + string.digits + string.punctuation
-    return generate_random_characters(length, characters)

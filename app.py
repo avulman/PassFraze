@@ -10,7 +10,7 @@ with open('common-words.txt', 'r') as file:
 
 def time_forecasted(password):
     characters = 94
-    guesses_per_second = 11575 / characters
+    guesses_per_second = 550000 / characters
 
     permutations = characters ** len(password)
     seconds_required = permutations / guesses_per_second
@@ -182,7 +182,12 @@ def crack():
             time_taken = end_time - start_time
             break
 
-    return render_template('crack.html', password=password, attempt=attempt, attempts=attempts, time_forecasted=forecasted_time, time_taken=time_taken)
+    forecasted_time = int(float(forecasted_time))
+    time_taken_formatted = "{:.2f}".format(time_taken)
+    attempts_formatted = '{:,}'.format(attempts)
+
+    return render_template('crack.html', password=password, attempt=attempt, attempts=attempts_formatted, time_forecasted=forecasted_time, time_taken=time_taken_formatted)
+
 
 @app.route('/about')
 def about():

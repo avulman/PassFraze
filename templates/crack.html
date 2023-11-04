@@ -28,10 +28,30 @@
                 <div class="password__submit"><button type="submit">Run Script</button></div></div>
                 {% if password %}
                 <div class="password__result"><p>Attempting to crack: <b>'{{ password }}'</b></p></div>
-                <div class="password__result"><p>This may take up to <b>{{ time_forecasted }} seconds (worst case scenario, it will likely take way less time.) </b></p></div>
+                {% if time_forecasted|float > 60 %}
+                    {% set minutes = (time_forecasted|float)//60 %}
+                    {% set seconds = (time_forecasted|float)%60 %}
+                    {% if minutes == 1 %}
+                        <div class="password__result"><p>This may take up to <b>{{ minutes|int }} minute and {{ seconds }} second{{ "s" if seconds > 1 else "" }}</b> (worst case scenario, it will likely take way less time). </p></div>
+                    {% else %}
+                        <div class="password__result"><p>This may take up to <b>{{ minutes|int }} minutes and {{ seconds }} seconds</b> (worst case scenario, it will likely take way less time). </p></div>
+                    {% endif %}
+                {% else %}
+                    <div class="password__result"><p>This may take up to <b>{{ time_forecasted|int }} second{{ "s" if time_forecasted > 1 else "" }}</b> (worst case scenario, it will likely take way less time). </p></div>
+                {% endif %}
                 {% endif %}
                 {% if time_taken is defined %}
-                <div class="password__result"><p>Time elapsed: <b>{{ time_taken }} seconds</b></p></div>
+                {% set minutes = (time_taken|float)//60 %}
+                {% set seconds = (time_taken|float)%60 %}
+                {% if minutes > 0 %}
+                    {% if minutes == 1 %}
+                        <div class="password__result"><p>Time elapsed: <b>{{ minutes|int }} minute and {{ seconds }} second{{ "s" if seconds > 1 else "" }}</b></p></div>
+                    {% else %}
+                        <div class="password__result"><p>Time elapsed: <b>{{ minutes|int }} minutes and {{ seconds }} seconds</b></p></div>
+                    {% endif %}
+                {% else %}
+                    <div class="password__result"><p>Time elapsed: <b>{{ seconds }} second{{ "s" if seconds > 1 else "" }}</b></p></div>
+                {% endif %}
                 <div class="password__result"><p>Total number of attempts: <b>{{ attempts }}</b></p></div>
                 {% endif %}
             </div>

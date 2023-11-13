@@ -186,7 +186,7 @@ def crack():
     time_taken_formatted = "{:.2f}".format(time_taken)
     attempts_formatted = '{:,}'.format(attempts)
 
-    return render_template('crack.html', password=password, attempt=attempt, attempts=attempts_formatted, time_forecasted=forecasted_time, time_taken=time_taken_formatted)
+    return render_template('crack.html', password=password, attempt=attempt, attempts=attempts_formatted, time_forecasted=forecasted_time, time_taken=time_taken_formatted, show_loading_message=False)
 
 
 @app.route('/about')

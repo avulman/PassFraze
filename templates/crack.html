@@ -25,9 +25,11 @@
         <div class="password__test__options--container">
             <form action="/crack/pressed" method="post">
                 <div class="input__box"><input type="text" id="password" name="password"  required><br><br></div>
-                <div class="password__submit"><button type="submit">Run Script</button></div></div>
+                <div class="password__submit">
+                    <button type="submit" id="runScriptButton">Run Script</button>
+                </div>
+                <div class ="password__submit--animation"><p id="loadingMessage" {% if show_loading_message %}style="display: block;"{% else %}style="display: none;"{% endif %}>Attempting to crack, please wait.</p></div>
                 {% if password %}
-                <div class="password__result"><p>Attempting to crack: <b>'{{ password }}'</b></p></div>
                 {% if time_forecasted|float > 60 %}
                     {% set minutes = (time_forecasted|float)//60 %}
                     {% set seconds = (time_forecasted|float)%60 %}
@@ -57,5 +59,19 @@
             </div>
         </form>
     </div>
+    <script>
+        document.getElementById('runScriptButton').addEventListener('click', function () {
+            document.getElementById('loadingMessage').style.display = 'block';
+        });
+    </script>
+    <script>
+        document.getElementById('runScriptButton').addEventListener('click', function () {
+            var loadingMessage = document.getElementById('loadingMessage');
+            loadingMessage.style.display = 'block';
+            setTimeout(function () {
+                loadingMessage.classList.add('show');
+            }, 10);
+        });
+    </script>
 </body>
 </html>

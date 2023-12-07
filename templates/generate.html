@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;700&display=swap">
     <title>About PassFraze</title>
     <link rel="stylesheet" href="/gui/style.css">
+    <script src="../gui/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -17,8 +19,22 @@
             </nav>
         </div>
     </header>
+    <main>
+        <div class="button_container">
+            <section id="buttons">
+                <button id="navigate_generate" class="navigate_buttons">Password Generator</button>
+                <button id="navigate_test" class="navigate_buttons">Test Password Strength</button>
+                <button id="navigate_crack" class="navigate_buttons">Crack the Password</button>
+                <!--<button id="generate">Generate Password</button>
+                <button id="test">Test Password Strength</button>
+                <button id="crack">Crack Password</button> -->
+            </section>
+        </div>
+    </main>
+    <div class="script__description--container">
     <div class="password__utility--info">
-        <p>The PassFraze generate utility allows you to generate a strong random password, and tailor it with your own preferences. Simply input a length, and select the options you would like to be included in your unique password.</p>
+        <p style="text-align: center">The PassFraze generate utility allows you to generate a strong random password, and tailor it with your own preferences. Simply input a length, and select the options you would like to be included in your unique password.</p>
+    </div>
     </div>
     <div class="password__generate--body">    
     <div class="password__body--h1"><h1>Customize Your Password</h1></div>
@@ -39,8 +55,9 @@
             <div class="password__option"><input type="checkbox" id="special" name="special">
             <label for="special">Special Characters</label><br></div>
         </div>
-            <div class="password__submit"><button type="submit">Generate</button>
-            </div>
+        <div class="password--submit">
+        <button type="submit" class="submit--button">Generate</button>
+            </div></div>
         </form>
         
     <div class="password__result">

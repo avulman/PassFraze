@@ -1,3 +1,8 @@
+* {
+  font-family: 'Product Sans', sans-serif;
+}
+
+
 body {
   background-color: #eeeeee;
   font-family: Arial, sans-serif;
@@ -5,11 +10,20 @@ body {
   padding: 0;
 }
 
+
 header {
   background-color: #222;
   color: white;
   text-align: center;
   padding: 1rem;
+}
+
+.index__password--svg{
+  scale: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 4rem;
 }
 
 .header_content {
@@ -25,6 +39,10 @@ header {
   margin-right: 50px;
 }
 
+.PassFraze__main:hover {
+  opacity: 0.95;
+}
+
 .header_content h1 {
   margin: 0;
 }
@@ -35,12 +53,8 @@ header {
   transition: opacity 0.3s ease;
 }
 
-.header_content h1 a:hover {
-  opacity: 0.8;
-}
-
 main {
-  padding: 3rem;
+  padding: 0;
 }
 
 .about__subtitle__with--image {
@@ -61,22 +75,16 @@ main {
   padding: 5vh;
 }
 
-.about_section {
-  max-width: 700px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba
-}
-
 .about_section img {
   width: 40px;
 }
 
-.faq_section {
+.faq_section,
+.about_section {
   max-width: 700px;
   margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   background-color: #fff;
   padding: 1rem;
   border-radius: 5px;
@@ -84,17 +92,33 @@ main {
 }
 
 button {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 1rem 2rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  margin: 0.5rem 0.5rem;
+  display:inline-block;
+  outline: 0;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  color: white;
+  background: radial-gradient( 100% 100% at 100% 0%, #74cc77 0%, #4CAF50 100% );
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(58, 111, 62, 0.5);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 2rem 2rem;
+  margin: 0.5rem 0.5rem;
+  text-align: center;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.2s ease,transform 0.2s ease;
+  will-change: box-shadow,transform;
+}
+
+button:hover{
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(30, 70, 33, 0.5);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
 }
 
 nav {
@@ -102,49 +126,90 @@ nav {
 }
 
 .header_buttons {
-  background-color: #00c3ff;
-  border: none;
-  color: white;
-  padding: 0.5rem 3rem;
-  text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 0.8rem;
+  background: radial-gradient( 100% 100% at 100% 0%, #3ed2ff 0%, #00c3ff 100% );
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(58, 100, 111, 0.5);
+  color: white;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  font-size: 18px;
+  text-decoration: none;
+  outline: 0;
+  border: none;
+  padding: 0.5rem 3rem;
+  padding-left: 2.4rem;
   margin: 0.5rem 0.5rem;
+  display: inline-block;
   cursor: pointer;
   border-radius: 5px;
   width: 35px;
+  transition: box-shadow 0.2s ease,transform 0.2s ease;
+  will-change: box-shadow,transform;
 }
 
 .header_buttons:hover {
-  background-color: #17b1e0;
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(58, 107, 111, 0.5);
+  transform: translateY(-2px);
+}
+
+.header_buttons:active {
+  box-shadow: inset 0px 3px 7px #75dbe9;
+  transform: translateY(1px);
 }
 
 .header_button_3 {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 0.5rem 3rem;
-  text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 0.8rem;
+  background: radial-gradient( 100% 100% at 100% 0%, #74cc77 0%, #4CAF50 100% );
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(58, 111, 62, 0.5);
+  color: white;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  font-size: 18px;
+  text-decoration: none;
+  outline: 0;
+  border: none;
+  padding: 0.5rem 3rem;
+  padding-left: 2.4rem;
   margin: 0.5rem 0.5rem;
+  display: inline-block;
   cursor: pointer;
   border-radius: 5px;
   width: 35px;
+  transition: box-shadow 0.2s ease,transform 0.2s ease;
+  will-change: box-shadow,transform;
+}
+
+.header_button_3:hover {
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(58, 111, 62, 0.5);
+  transform: translateY(-2px);
+}
+
+.header_button_3:active {
+  box-shadow: inset 0px 3px 7px rgb(126, 197, 130);
+  transform: translateY(1px);
+}
+
+.submit--button{
+  display:inline-block;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  color: white;
+  background: radial-gradient( 100% 100% at 100% 0%, #F78125 0%, #e8600a 100% );
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgba(111, 94, 58, 0.5);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 1rem 2rem;
+  margin: 0.5rem 0.5rem;
+  text-align: center;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.2s ease,transform 0.2s ease;
+  will-change: box-shadow,transform;
 }
 
 .navigate_buttons{
   width: 234px;
-}
-
-.header_button_3:hover {
-  background-color: #45a049;
-}
-
-button:hover {
-  background-color: #45a049;
 }
 
 .password__generate__options--container{
@@ -152,6 +217,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   padding-left: 1%;
+  font-size: 25px;
 }
 
 .password__test--center{
@@ -170,6 +236,12 @@ button:hover {
   align-items: center;
 }
 
+.input__box:focus{
+  outline: none;
+  border: 1px solid #007c89;
+  box-shadow: inset 0 0 0 1px #007c89;
+}
+
 .input__box{
   scale: 150%;
 }
@@ -180,12 +252,12 @@ button:hover {
   align-items: center;
 }
 
-.password__submit{
+.password--submit{
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 25px;
-  scale: 90%;
+  scale: 100%;
 }
 
 .password__option{
@@ -197,6 +269,12 @@ button:hover {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.index--h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .password__body--h1,
@@ -217,8 +295,8 @@ button:hover {
 }
 
 .password__utility--info{
-  font-size: 20px;
-  max-width: 600px;
+  font-size: 30px;
+  max-width: 800px;
   margin: 0 auto;
   margin-bottom: -15px;
 }

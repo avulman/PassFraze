@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;700&display=swap">
     <title>About PassFraze</title>
     <link rel="stylesheet" href="/gui/style.css">
+    <script src="../gui/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -17,16 +19,28 @@
             </nav>
         </div>
     </header>
+    <main>
+        <div class="button_container">
+            <section id="buttons">
+                <button id="navigate_generate" class="navigate_buttons">Password Generator</button>
+                <button id="navigate_test" class="navigate_buttons">Test Password Strength</button>
+                <button id="navigate_crack" class="navigate_buttons">Crack the Password</button>
+                <!--<button id="generate">Generate Password</button>
+                <button id="test">Test Password Strength</button>
+                <button id="crack">Crack Password</button> -->
+            </section>
+        </div>
+    </main>
     <body>
         <div class="password__utility--info">
-            <p>The PassFraze crack utility script will iterate through each possible permutation until it correctly guesses your password. This tool is intended to demonstrate the time in which an account with infinite login attempts can be accessed, if there is no restraint on login attempts.</p>
+            <p style="text-align: center">The PassFraze crack utility script will iterate through each possible permutation until it correctly guesses your password. This tool is intended to demonstrate the time in which an account with infinite login attempts can be accessed, if there is no restraint on login attempts.</p>
         </div>
         <div class="password__body--h1"><h1>Input a Password to Crack</h1></div>
         <div class="password__test__options--container">
             <form action="/crack/pressed" method="post">
                 <div class="input__box"><input type="text" id="password" name="password"  required><br><br></div>
-                <div class="password__submit">
-                    <button type="submit" id="runScriptButton">Run Script</button>
+                <div class="password--submit">
+                    <button type="submit" class="submit--button">Run Script</button>
                 </div>
                 <div class ="password__submit--animation"><p id="loadingMessage" {% if show_loading_message %}style="display: block;"{% else %}style="display: none;"{% endif %}>Attempting to crack, please wait.</p></div>
                 {% if password %}

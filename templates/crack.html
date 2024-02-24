@@ -10,6 +10,7 @@
 </head>
 <body>
     <header>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
         <div class="header_content">
             <div class="PassFraze__main"><h1><a href="/">PassFraze</a></h1></div>
             <nav>
@@ -72,6 +73,10 @@
                 {% endif %}
             </div>
         </form>
+        <div class="password__result"><p>Current Attempt: <b id="currentAttempt"></b></p></div>
+        <div class="password__result"><p>Total number of attempts: <b id="attempts"></b></p></div>
+        <div class="password__result"><p>Time forecasted: <b id="timeForecasted"></b></p></div>
+        <div class="password__result"><p>Time taken: <b id="timeTaken"></b></p></div>
     </div>
     <script>
         document.getElementById('runScriptButton').addEventListener('click', function () {

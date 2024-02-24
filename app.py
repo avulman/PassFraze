@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request
+from flask_socketio import SocketIO, emit
 import random
 import string
 import time
 import re
 import math
+
+app = Flask(__name__, static_url_path='/gui', static_folder='gui')
+socketio = SocketIO(app)
 
 with open('common-words.txt', 'r') as file:
         common_words = [line.strip() for line in file]
@@ -182,12 +186,24 @@ def crack():
             time_taken = end_time - start_time
             break
 
-    forecasted_time = int(float(forecasted_time))
-    time_taken_formatted = "{:.2f}".format(time_taken)
-    attempts_formatted = '{:,}'.format(attempts)
+        # Send updates to the client using WebSocket
+        socketio.emit('crack_update', {
+            'attempt': attempt,
+            'attempts': attempts,
+            'time_forecasted': int(float(forecasted_time)),
+            'time_taken': "{:.2f}".format(time_taken),
+        }, namespace='/crack')
 
-    return render_template('crack.html', password=password, attempt=attempt, attempts=attempts_formatted, time_forecasted=forecasted_time, time_taken=time_taken_formatted, show_loading_message=False)
+    return render_template('crack.html', password=password, attempt=attempt, attempts_formatted='{:,}'.format(attempts), time_forecasted=int(float(forecasted_time)), time_taken="{:.2f}".format(time_taken), show_loading_message=False)
 
+
+@socketio.on('connect', namespace='/crack')
+def handle_crack_connect():
+    print('Client connected to crack namespace')
+
+@socketio.on('disconnect', namespace='/crack')
+def handle_crack_disconnect():
+    print('Client disconnected from crack namespace')
 
 @app.route('/about')
 def about():

@@ -13,10 +13,10 @@ PassFraze is a versatile 3-in-1 password tool that allows users to generate secu
 ## Technologies Used
 
 - **Languages**:
-  - HTML
-  - CSS
   - Python
   - JavaScript
+  - HTML
+  - CSS
   
 - **Framework**: [Flask](https://flask.palletsprojects.com/)
 

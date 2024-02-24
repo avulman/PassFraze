@@ -2,8 +2,8 @@
 
 PassFraze is a versatile 3-in-1 password tool that allows users to generate secure passwords, crack weak passwords, and analyze password strength. It is implemented with a user-friendly web interface using Flask for Python.<br>
 
-![PassFraze Screenshot 1](screenshots/main.jpg)
-
+![PassFraze Screenshot 1](screenshots/main.jpg) <br>
+*Ref 1: Main landing page*
 
 ## Features
 

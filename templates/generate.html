@@ -25,50 +25,53 @@
                 <button id="navigate_generate" class="navigate_buttons">Password Generator</button>
                 <button id="navigate_test" class="navigate_buttons">Test Password Strength</button>
                 <button id="navigate_crack" class="navigate_buttons">Crack the Password</button>
-                <!--<button id="generate">Generate Password</button>
-                <button id="test">Test Password Strength</button>
-                <button id="crack">Crack Password</button> -->
             </section>
         </div>
     </main>
-    <div class="script__description--container">
-    <div class="password__utility--info">
-        <p style="text-align: center">The PassFraze generate utility allows you to generate a strong random password, and tailor it with your own preferences. Simply input a length, and select the options you would like to be included in your unique password.</p>
-    </div>
-    </div>
     <div class="password__generate--body">    
     <div class="password__body--h1"><h1>Customize Your Password</h1></div>
     <div class="password__generate__options--container">
-        <form action="/generate/pressed" method="post">
-            <div class="password__option"><label for="length">Length:&nbsp;</label>
-            <input type="number" id="length" name="length" min="1" value="12"><br></div>
-
+        <form id="passwordForm" action="/generate/pressed" method="post">
+            <div class="password__option">
+                <label for="length">Length:&nbsp;</label>
+                <input type="number" id="length" name="length" min="1" value="12">
+                <br>
+            </div>
+    
             <div class="password__option"><input type="checkbox" id="uppercase" name="uppercase">
-            <label for="uppercase">Uppercase</label><br></div>
-
+            <label for="uppercase">&nbsp;Uppercase</label><br></div>
+    
             <div class="password__option"><input type="checkbox" id="lowercase" name="lowercase">
-            <label for="lowercase">Lowercase</label><br></div>
-
+            <label for="lowercase">&nbsp;Lowercase</label><br></div>
+    
             <div class="password__option"><input type="checkbox" id="digits" name="digits">
-            <label for="digits">Digits</label><br></div>
-
+            <label for="digits">&nbsp;Digits</label><br></div>
+    
             <div class="password__option"><input type="checkbox" id="special" name="special">
-            <label for="special">Special Characters</label><br></div>
-        </div>
-        <div class="password--submit">
-        <button type="submit" class="submit--button">Generate</button>
-            </div></div>
+            <label for="special">&nbsp;Special Characters</label><br></div>
+    
+            <div class="password--submit">
+                <button type="submit" class="submit--button">Generate</button>
+            </div>
         </form>
+    </div>
         
     <div class="password__result">
     {% if error %}
         <p>{{ error }}</p>
     {% else %}
         {% if password %}
-            <p>Generated password: <b>'{{ password }}'</b></p>
+            <p>Generated password: <b>{{ password }}</b></p>
         {% endif %}
     {% endif %}
             </div>
         </div>
+    <div class="script__description--container">
+    <div class="password__utility--info">
+        <p style="text-align: center">The PassFraze generate utility allows you to generate a strong random password, 
+            and tailor it with your own preferences. Simply input a length, and select the options you would like to be
+             included in your unique password.</p>
+    </div>
+    </div>
     </body>
 </html>

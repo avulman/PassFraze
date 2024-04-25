@@ -216,7 +216,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 1%;
   font-size: 25px;
 }
 
@@ -226,7 +225,6 @@ nav {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-
 }
 
 .password__test__options--container,
@@ -258,6 +256,48 @@ nav {
   align-items: center;
   padding-top: 25px;
   scale: 100%;
+}
+
+#length{
+  width: 50px;
+  font-size: 18px;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--form-background);
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+  border: 0.1em solid currentColor;
+  border-radius: 0.15em;
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  box-shadow: inset 1em 1em var(--form-control-color);
+  transform: scale(0);
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:disabled {
+  --form-control-color: var(--form-control-disabled);
+
+  color: var(--form-control-disabled);
 }
 
 .password__option{
@@ -295,7 +335,7 @@ nav {
 }
 
 .password__utility--info{
-  font-size: 30px;
+  font-size: 25px;
   max-width: 800px;
   margin: 0 auto;
   margin-bottom: -15px;
